@@ -51,7 +51,7 @@ class ResultData {
 
   static ResultData fromFire(QueryDocumentSnapshot<Map<String, dynamic>> data) {
     final map = data.data();
-    return ResultData.fromMap(map)..id=data.id;
+    return ResultData.fromMap(map)..id = data.reference.path;
   }
 
   factory ResultData.fromMap(Map<String, dynamic> map) {
