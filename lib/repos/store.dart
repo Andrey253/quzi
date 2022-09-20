@@ -1,0 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:quzi/data/result_data.dart';
+
+class Store {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Future<bool> sendResult(ResultData result) async {
+    firestore.collection(ResultData.CLASS_NAME).add(result.toMap());
+    return false;
+  }
+
+  Future<List<ResultData>> getResult() async {
+        final d = await firestore.collection(ResultData.CLASS_NAME).get();
+    return d.docs.map((e) => ResultData.fromMap(e.data())).toList();
+  }
+}
