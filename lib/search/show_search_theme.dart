@@ -16,12 +16,12 @@ class ShowSearchCategory extends SearchDelegate<String?> {
 
   @override
   Widget? buildLeading(BuildContext context) {
-    return IconButton(onPressed: () => close(context, null), icon: Icon(Icons.arrow_back));
+    return IconButton(onPressed: () => close(context, null), icon: const Icon(Icons.arrow_back));
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return TextButton.icon(onPressed: () => query = 'refactor', icon: Icon(Icons.home), label: Text('refactor'));
+    return TextButton.icon(onPressed: () => query = 'refactor', icon: const Icon(Icons.home), label: const Text('refactor'));
   }
 
   @override

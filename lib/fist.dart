@@ -40,7 +40,7 @@ class _FirstState extends State<First> {
           },
         ),
         TextButton(
-          child: isLoading ? const Text('Загрузка вопросов...') : Text('Начать'),
+          child: isLoading ? const Text('Загрузка вопросов...') : const Text('Начать'),
           onPressed: () async {
             isLoading = true;
             await model.loadQuestions();

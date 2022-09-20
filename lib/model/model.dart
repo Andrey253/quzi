@@ -32,8 +32,6 @@ class Model with ChangeNotifier {
       if (difficulty != null) {
         queryParameters.addAll({'difficulty': difficulty!});
       }
-      print('teg queryParameters $queryParameters');
-
       final responseDio = await Dio().get('https://quizapi.io/api/v1/questions',
           queryParameters: queryParameters, options: Options(responseType: ResponseType.json));
 

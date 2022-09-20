@@ -90,17 +90,5 @@ class QuziData {
     return 'QuziApi(id: $id, question: $question, description: $description, answers: $answers, multipleCorrectAnswers: $multipleCorrectAnswers, correctAnswers: $correctAnswers, correctAnswer: $correctAnswer, tags: $tags, category: $category, difficulty: $difficulty)';
   }
 
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        question.hashCode ^
-        description.hashCode ^
-        answers.hashCode ^
-        multipleCorrectAnswers.hashCode ^
-        correctAnswers.hashCode ^
-        correctAnswer.hashCode ^
-        tags.hashCode ^
-        category.hashCode ^
-        difficulty.hashCode;
-  }
+
 }

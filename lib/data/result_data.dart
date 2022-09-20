@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ResultData {
+  // ignore: constant_identifier_names
   static const CLASS_NAME = 'ResultData';
   int correctAnswer;
   int unCorrectAnswer;

@@ -17,7 +17,7 @@ class ItemResult extends StatelessWidget {
     return Card(
         // ignore: sort_child_properties_last
         child: ListTile(
-          trailing: IconButton(onPressed: () => model.delete(resultData), icon: Icon(Icons.delete)),
+          trailing: IconButton(onPressed: () => model.delete(resultData), icon: const Icon(Icons.delete)),
           title: Text('Выполнено $time $date '),
           leading: SizedBox(width: 50, child: Text('$pr %')),
           subtitle: Column(
