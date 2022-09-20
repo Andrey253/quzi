@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quzi/data/quzi_model.dart';
+import 'package:quzi/item_result.dart';
 import 'package:quzi/model/model.dart';
 
 class Result extends StatefulWidget {
@@ -21,16 +21,22 @@ class _ResultState extends State<Result> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 22),
+              const SizedBox(height: 22),
               Text('Правильных ответов ${model.answers.length}'),
-              SizedBox(height: 22),
+              const SizedBox(height: 22),
               Text('Не правильных ответов ${model.questions.length - model.answers.length}'),
-              SizedBox(height: 22),
-              TextButton(onPressed: () => model.sendResult(), child: Text('Отправить результат')),
-              TextButton(onPressed: () => model.getResult(), child: Text('Проверить результаты')),
+              const SizedBox(height: 22),
+              model.sended
+                  ? const Text('Результат отправлен')
+                  : model.isLoading
+                      ? const CircularProgressIndicator()
+                      : TextButton(onPressed: () => model.sendResult(), child: const Text('Отправить результат')),
+              model.isLoading
+                  ? const CircularProgressIndicator()
+                  : TextButton(onPressed: () => model.getResult(), child: const Text('Проверить результаты')),
               Expanded(
                   child: Column(
-                children: model.resultList.map((e) => Text(e.correctAnswer)).toList(),
+                children: model.resultList.map((e) => ItemResult(resultData: e)).toList(),
               ))
             ],
           ),

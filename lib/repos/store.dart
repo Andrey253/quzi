@@ -9,7 +9,12 @@ class Store {
   }
 
   Future<List<ResultData>> getResult() async {
-        final d = await firestore.collection(ResultData.CLASS_NAME).get();
-    return d.docs.map((e) => ResultData.fromMap(e.data())).toList();
+    final d = await firestore.collection(ResultData.CLASS_NAME).get();
+    return d.docs.map((e) => ResultData.fromFire(e)).toList();
+  }
+
+  Future<void> delete(ResultData resultData) async {
+    if (resultData.id == null) return;
+    await firestore.doc(resultData.id!).delete();
   }
 }

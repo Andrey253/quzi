@@ -1,23 +1,29 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ResultData {
   static const CLASS_NAME = 'ResultData';
-  String correctAnswer;
-  String unCorrectAnswer;
+  int correctAnswer;
+  int unCorrectAnswer;
+  int totalQuestions;
   DateTime dateTime;
   String? category;
+  String? id;
   String? difficulty;
   ResultData({
     required this.correctAnswer,
     required this.unCorrectAnswer,
+    required this.totalQuestions,
     required this.dateTime,
     this.category,
     this.difficulty,
   });
 
   ResultData copyWith({
-    String? correctAnswer,
-    String? unCorrectAnswer,
+    int? correctAnswer,
+    int? unCorrectAnswer,
+    int? totalQuestions,
     DateTime? dateTime,
     String? category,
     String? difficulty,
@@ -25,6 +31,7 @@ class ResultData {
     return ResultData(
       correctAnswer: correctAnswer ?? this.correctAnswer,
       unCorrectAnswer: unCorrectAnswer ?? this.unCorrectAnswer,
+      totalQuestions: totalQuestions ?? this.totalQuestions,
       dateTime: dateTime ?? this.dateTime,
       category: category ?? this.category,
       difficulty: difficulty ?? this.difficulty,
@@ -35,16 +42,23 @@ class ResultData {
     return {
       'correctAnswer': correctAnswer,
       'unCorrectAnswer': unCorrectAnswer,
+      'totalQuestions': totalQuestions,
       'dateTime': dateTime.millisecondsSinceEpoch,
       'category': category,
       'difficulty': difficulty,
     };
   }
 
+  static ResultData fromFire(QueryDocumentSnapshot<Map<String, dynamic>> data) {
+    final map = data.data();
+    return ResultData.fromMap(map)..id=data.id;
+  }
+
   factory ResultData.fromMap(Map<String, dynamic> map) {
     return ResultData(
       correctAnswer: map['correctAnswer'],
       unCorrectAnswer: map['unCorrectAnswer'],
+      totalQuestions: map['totalQuestions'],
       dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime']),
       category: map['category'],
       difficulty: map['difficulty'],
@@ -57,7 +71,7 @@ class ResultData {
 
   @override
   String toString() {
-    return 'ResultData(correctAnswer: $correctAnswer, unCorrectAnswer: $unCorrectAnswer, dateTime: $dateTime, category: $category, difficulty: $difficulty)';
+    return 'ResultData(correctAnswer: $correctAnswer, unCorrectAnswer: $unCorrectAnswer, totalQuestions: $totalQuestions, dateTime: $dateTime, category: $category, difficulty: $difficulty)';
   }
 
   @override
@@ -67,6 +81,7 @@ class ResultData {
     return other is ResultData &&
         other.correctAnswer == correctAnswer &&
         other.unCorrectAnswer == unCorrectAnswer &&
+        other.totalQuestions == totalQuestions &&
         other.dateTime == dateTime &&
         other.category == category &&
         other.difficulty == difficulty;
@@ -76,6 +91,7 @@ class ResultData {
   int get hashCode {
     return correctAnswer.hashCode ^
         unCorrectAnswer.hashCode ^
+        totalQuestions.hashCode ^
         dateTime.hashCode ^
         category.hashCode ^
         difficulty.hashCode;

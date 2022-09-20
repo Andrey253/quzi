@@ -20,6 +20,8 @@ class Model with ChangeNotifier {
   }
 
   Future<void> loadQuestions() async {
+    sended = false;
+    score = 0;
     notifyListeners();
     answers = {};
     try {
@@ -77,18 +79,34 @@ class Model with ChangeNotifier {
   }
 
   Future<bool> sendResult() async {
+    isLoading = true;
+    notifyListeners();
     final res = ResultData(
+        totalQuestions: questions.length,
         category: category,
         difficulty: difficulty,
-        correctAnswer: answers.length.toString(),
-        unCorrectAnswer: (questions.length - answers.length).toString(),
+        correctAnswer: answers.length,
+        unCorrectAnswer: (questions.length - answers.length),
         dateTime: DateTime.now());
-    store.sendResult(res);
-    return false;
+    await store.sendResult(res);
+    sended = true;
+    isLoading = false;
+    notifyListeners();
+    return true;
   }
 
-  void getResult() async {
-    resultList = await store.getResult();
+  bool sended = false;
+  bool isLoading = false;
+  getResult() async {
+    isLoading = true;
     notifyListeners();
+    resultList = await store.getResult();
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> delete(ResultData resultData) async {
+    await store.delete(resultData);
+    getResult();
   }
 }
