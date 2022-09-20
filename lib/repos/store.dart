@@ -15,8 +15,6 @@ class Store {
 
   Future<void> delete(ResultData resultData) async {
     if (resultData.id == null) return;
-    print('teg resultData.id ${resultData.id}');
-
     await firestore.doc(resultData.id!).delete();
   }
 }

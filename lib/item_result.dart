@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quzi/data/result_data.dart';
-import 'package:quzi/repos/store.dart';
-
 import 'model/model.dart';
 
 class ItemResult extends StatelessWidget {

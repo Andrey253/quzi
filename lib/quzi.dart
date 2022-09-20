@@ -19,10 +19,7 @@ class _QuziPageState extends State<QuziPage> {
   Widget build(BuildContext context) {
     final model = context.watch<Model>();
     return Scaffold(
-      appBar: AppBar(
-        elevation: 1,
-        title: Text("Score: ${model.score}"),
-      ),
+      appBar: AppBar(elevation: 1, title: Text("Score: ${model.score}")),
       body: model.questions.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : model.questions.isNotEmpty
@@ -51,53 +48,36 @@ class _QuziPageState extends State<QuziPage> {
                       ]);
                     },
                     controller: _controller,
-                    onPageChanged: (ind) {
-                      setState(() {
-                        currentPage = ind;
-                      });
-                    },
+                    onPageChanged: (ind) => setState(() => currentPage = ind),
                   ),
                 )
               : const Text("Some error! Check console"),
-      /* A language that doesn't affect the way you think about programming is not worth knowing. */
       bottomNavigationBar: (model.questions.isNotEmpty)
           ? BottomAppBar(
               child: SizedBox(
-                height: 60.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: currentPage <= 0 ? null : () => _controller.jumpToPage(currentPage - 1),
-                      child: const Text("Prev"),
-                    ),
-                    const SizedBox(width: 10.0),
-                    // (currentPage == model.questions.length - 1)
-
-                    ElevatedButton(
-                      onPressed: currentPage >= model.questions.length - 1
-                          ? null
-                          : () {
-                              _controller.jumpToPage(currentPage + 1);
-                            },
-                      child: const Text("Next"),
-                    ),
-                    const SizedBox(width: 10.0),
-                    ElevatedButton(
-                      onPressed: () async {
-                        Navigator.pushNamed(context, Result.id);
-                      },
-                      child: const Text("Done"),
-                    ),
-                  ],
-                ),
-              ),
-            )
+                  height: 60.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: currentPage <= 0 ? null : () => _controller.jumpToPage(currentPage - 1),
+                        child: const Text("Prev"),
+                      ),
+                      const SizedBox(width: 10.0),
+                      ElevatedButton(
+                        onPressed: currentPage >= model.questions.length - 1
+                            ? null
+                            : () => _controller.jumpToPage(currentPage + 1),
+                        child: const Text("Next"),
+                      ),
+                      const SizedBox(width: 10.0),
+                      ElevatedButton(
+                        onPressed: () => Navigator.pushNamed(context, Result.id),
+                        child: const Text("Done"),
+                      ),
+                    ],
+                  )))
           : null,
     );
-  }
-
-  _getColor(bool r) {
-    return r ? Colors.green.shade100 : Colors.white;
   }
 }

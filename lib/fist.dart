@@ -15,13 +15,6 @@ class First extends StatefulWidget {
 bool isLoading = false;
 
 class _FirstState extends State<First> {
-  // @override
-  // void initState() {
-  //   category = 'Easy';
-  //   category = 'Linux';
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final model = context.watch<Model>();
@@ -31,9 +24,7 @@ class _FirstState extends State<First> {
       child:
           Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
         Image.asset("images/fox.png"),
-        SizedBox(
-          height: 50,
-        ),
+        const SizedBox(height: 50),
         TextButton(
           child: Text(model.difficulty ?? 'Выберите сложность'),
           onPressed: () async {
@@ -49,12 +40,13 @@ class _FirstState extends State<First> {
           },
         ),
         TextButton(
-          child: isLoading ? Text('Загрузка вопросов...') : Text('Начать'),
+          child: isLoading ? const Text('Загрузка вопросов...') : Text('Начать'),
           onPressed: () async {
             isLoading = true;
             await model.loadQuestions();
             isLoading = false;
             setState(() {});
+            // ignore: use_build_context_synchronously
             Navigator.pushNamed(context, QuziPage.id);
           },
         ),
