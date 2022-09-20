@@ -9,22 +9,23 @@ class ItemResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<Model>();
-    final pr = (resultData.correctAnswer / resultData.totalQuestions).toStringAsFixed(2);
+    final pr = (resultData.correctAnswer / resultData.totalQuestions * 100).toStringAsFixed(2);
     final dt = resultData.dateTime;
     final time = '${dt.hour.toString().padLeft(2, '0')} : ${dt.minute.toString().padLeft(2, '0')}';
     final date = '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year}';
 
     return Card(
         // ignore: sort_child_properties_last
-        child: ListTile(trailing: IconButton(onPressed: ()=>model.delete(resultData), icon: Icon(Icons.delete)),
+        child: ListTile(
+          trailing: IconButton(onPressed: () => model.delete(resultData), icon: Icon(Icons.delete)),
           title: Text('Выполнено $time $date '),
-          leading: Text('$pr %'),
+          leading: SizedBox(width: 60, child: Text('$pr %')),
           subtitle: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Сложность ${resultData.difficulty}'),
-              Text('Категория ${resultData.category}'),
+              Text('Сложность ${resultData.difficulty ?? 'не выбрана'}'),
+              Text('Категория ${resultData.category ?? 'не выбрана'}'),
               Text('Правильных ответов ${resultData.correctAnswer}'),
               Text('Не правильных ответов ${resultData.unCorrectAnswer}')
             ],

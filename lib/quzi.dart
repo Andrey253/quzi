@@ -19,7 +19,7 @@ class _QuziPageState extends State<QuziPage> {
   Widget build(BuildContext context) {
     final model = context.watch<Model>();
     return Scaffold(
-      appBar: AppBar(elevation: 1, title: Text("Score: ${model.score}")),
+      appBar: AppBar(elevation: 1, title: Text("Score: ${model.score}, page: ${currentPage+1}/${model.questions.length}")),
       body: model.questions.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : model.questions.isNotEmpty

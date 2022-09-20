@@ -27,13 +27,22 @@ class _ResultState extends State<Result> {
               Text('Не правильных ответов ${model.questions.length - model.answers.length}'),
               const SizedBox(height: 22),
               model.sended
-                  ? const Text('Результат отправлен')
+                  ? SizedBox(
+                      height: 40,
+                      child: TextButton(
+                          onPressed: () => model.restart(context),
+                          child: const Text('Результат отправлен, начать заново')))
                   : model.isLoading
-                      ? const CircularProgressIndicator()
-                      : TextButton(onPressed: () => model.sendResult(), child: const Text('Отправить результат')),
+                      ? const SizedBox(height: 30, child: CircularProgressIndicator())
+                      : SizedBox(
+                          height: 40,
+                          child: TextButton(
+                              onPressed: () => model.sendResult(), child: const Text('Отправить результат'))),
               model.isLoading
-                  ? const CircularProgressIndicator()
-                  : TextButton(onPressed: () => model.getResult(), child: const Text('Проверить результаты')),
+                  ? const SizedBox(height: 40, child: CircularProgressIndicator())
+                  : SizedBox(
+                      height: 40,
+                      child: TextButton(onPressed: () => model.getResult(), child: const Text('Проверить результаты'))),
               Expanded(
                   child: Column(
                 children: model.resultList.map((e) => ItemResult(resultData: e)).toList(),

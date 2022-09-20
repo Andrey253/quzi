@@ -26,6 +26,10 @@ class ShowSearchDifficulty extends SearchDelegate<String?> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return ListView(children: [...theme.map((e) => TextButton(child: Text(e), onPressed: ()=>close(context, e)))]);
+    return ListView(children: [
+      ...theme
+          .where((q) => q.toLowerCase().contains(query.toLowerCase()))
+          .map((e) => TextButton(child: Text(e), onPressed: () => close(context, e)))
+    ]);
   }
 }

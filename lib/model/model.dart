@@ -109,4 +109,10 @@ class Model with ChangeNotifier {
     await store.delete(resultData);
     getResult();
   }
+
+  restart(BuildContext context) {
+    category == null;
+    difficulty = null;
+    Navigator.pushReplacementNamed(context, '/');
+  }
 }
