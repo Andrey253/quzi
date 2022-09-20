@@ -30,6 +30,10 @@ class _FirstState extends State<First> {
             body: Center(
       child:
           Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+        Image.asset("images/fox.png"),
+        SizedBox(
+          height: 50,
+        ),
         TextButton(
           child: Text(model.difficulty ?? 'Выберите сложность'),
           onPressed: () async {
