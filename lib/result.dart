@@ -17,9 +17,8 @@ class _ResultState extends State<Result> {
     final model = context.watch<Model>();
     return SafeArea(
       child: Scaffold(
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 22),
               Text('Правильных ответов ${model.answers.length}'),
@@ -32,9 +31,7 @@ class _ResultState extends State<Result> {
                       child: TextButton(
                           onPressed: () => model.restart(context),
                           child: const Text('Результат отправлен, начать заново')))
-                  : model.isLoading
-                      ? const SizedBox(height: 30, child: CircularProgressIndicator())
-                      : SizedBox(
+                  : SizedBox(
                           height: 40,
                           child: TextButton(
                               onPressed: () => model.sendResult(), child: const Text('Отправить результат'))),
@@ -43,10 +40,9 @@ class _ResultState extends State<Result> {
                   : SizedBox(
                       height: 40,
                       child: TextButton(onPressed: () => model.getResult(), child: const Text('Проверить результаты'))),
-              Expanded(
-                  child: Column(
+              Column(
                 children: model.resultList.map((e) => ItemResult(resultData: e)).toList(),
-              ))
+              )
             ],
           ),
         ),

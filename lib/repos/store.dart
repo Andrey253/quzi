@@ -9,7 +9,7 @@ class Store {
   }
 
   Future<List<ResultData>> getResult() async {
-    final d = await firestore.collection(ResultData.CLASS_NAME).get();
+    final d = await firestore.collection(ResultData.CLASS_NAME).orderBy('dateTime',descending: true).get();
     return d.docs.map((e) => ResultData.fromFire(e)).toList();
   }
 
