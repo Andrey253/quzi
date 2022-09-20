@@ -21,7 +21,7 @@ class ShowSearchDifficulty extends SearchDelegate<String?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return TextButton.icon(onPressed: () => query = 'refactor', icon: const Icon(Icons.home), label: const Text('refactor'));
+    return const SizedBox.shrink();
   }
 
   @override
