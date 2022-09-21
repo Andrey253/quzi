@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:quzi/data/firestore_abstract.dart';
 import 'package:quzi/data/result_data.dart';
 
 class Store {
@@ -13,7 +14,7 @@ class Store {
     return d.docs.map((e) => ResultData.fromFire(e)).toList();
   }
 
-  Future<void> delete(ResultData resultData) async {
+  Future<void> delete<T extends FireStoreObject>(T resultData) async {
     if (resultData.id == null) return;
     await firestore.doc(resultData.id!).delete();
   }

@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:quzi/data/firestore_abstract.dart';
 
-class ResultData {
+class ResultData extends FireStoreObject{
   // ignore: constant_identifier_names
   static const CLASS_NAME = 'ResultData';
   int correctAnswer;
@@ -10,7 +11,6 @@ class ResultData {
   int totalQuestions;
   DateTime dateTime;
   String? category;
-  String? id;
   String? difficulty;
   ResultData({
     required this.correctAnswer,

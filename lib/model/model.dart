@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:quzi/data/firestore_abstract.dart';
 import 'package:quzi/data/quzi_model.dart';
 import 'package:quzi/data/result_data.dart';
 import 'package:quzi/repos/store.dart';
@@ -108,7 +109,7 @@ dynamic  groupValue(int index) => answers[index] !=null ? question(index).answer
     notifyListeners();
   }
 
-  Future<void> delete(ResultData resultData) async {
+  Future<void> delete<T extends FireStoreObject>(T resultData) async {
     await store.delete(resultData);
     getResult();
   }
