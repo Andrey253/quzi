@@ -113,6 +113,6 @@ class Model with ChangeNotifier {
   restart(BuildContext context) {
     category == null;
     difficulty = null;
-    Navigator.pushReplacementNamed(context, '/');
+    Navigator.pushNamedAndRemoveUntil(context, '/',(d)=>false);
   }
 }
