@@ -60,11 +60,14 @@ class Model with ChangeNotifier {
   }
 
   bool selected(int index, String itemQuest) {
-    return answers[index] == question(index).answers.indexOf(itemQuest);
+    return answers[index] == questions[index].answers.indexOf(itemQuest);
   }
 
-  Color getColor(dynamic itemQuest, int index) =>
-      question(index).answers.indexOf(itemQuest) == answers[index] ? Colors.green.shade100 : Colors.white;
+  Color getColor(dynamic itemQuest, int index) => selected(index, itemQuest)
+        ? questions[index].answers.indexOf(itemQuest) == questions[index].correctAnswers.indexOf('true')
+            ? Colors.green.shade100
+            : Colors.red.shade100
+        : Colors.white;
 
   groupValue(int index) => answers.length > index ? question(index).answers[answers[index]] : null;
 
@@ -113,6 +116,6 @@ class Model with ChangeNotifier {
   restart(BuildContext context) {
     category == null;
     difficulty = null;
-    Navigator.pushNamedAndRemoveUntil(context, '/',(d)=>false);
+    Navigator.pushNamedAndRemoveUntil(context, '/', (d) => false);
   }
 }

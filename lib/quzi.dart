@@ -19,7 +19,8 @@ class _QuziPageState extends State<QuziPage> {
   Widget build(BuildContext context) {
     final model = context.watch<Model>();
     return Scaffold(
-      appBar: AppBar(elevation: 1, title: Text("Score: ${model.score}, page: ${currentPage+1}/${model.questions.length}")),
+      appBar: AppBar(
+          elevation: 1, title: Text("Score: ${model.score}, page: ${currentPage + 1}/${model.questions.length}")),
       body: model.questions.isEmpty
           ? const Center(child: Text('Задания не получены'))
           : model.questions.isNotEmpty
@@ -29,10 +30,7 @@ class _QuziPageState extends State<QuziPage> {
                     itemCount: model.questions.length,
                     itemBuilder: (context, index) {
                       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(
-                          model.question(index).question ?? '',
-                          style: Theme.of(context).textTheme.headline5,
-                        ),
+                        Text(model.question(index).question ?? '', style: Theme.of(context).textTheme.headline5),
                         const SizedBox(height: 10.0),
                         ...model.question(index).answers.where((element) => element != null).map((itemQuest) => Card(
                             color: model.getColor(itemQuest, index),
