@@ -69,7 +69,7 @@ class Model with ChangeNotifier {
             : Colors.red.shade100
         : Colors.white;
 
-  groupValue(int index) => answers.length > index ? question(index).answers[answers[index]] : null;
+dynamic  groupValue(int index) => answers[index] !=null ? question(index).answers[answers[index]] : null;
 
   void setCategory(String? d) {
     category = d;
