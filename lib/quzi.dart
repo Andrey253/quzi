@@ -21,7 +21,7 @@ class _QuziPageState extends State<QuziPage> {
     return Scaffold(
       appBar: AppBar(elevation: 1, title: Text("Score: ${model.score}, page: ${currentPage+1}/${model.questions.length}")),
       body: model.questions.isEmpty
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: Text('Задания не получены'))
           : model.questions.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.all(16.0),

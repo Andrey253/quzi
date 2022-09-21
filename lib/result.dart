@@ -19,9 +19,15 @@ class _ResultState extends State<Result> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 22),
-              Text('Правильных ответов ${model.answers.length}'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Правильных ответов ${model.answers.length}'),
+                ],
+              ),
               const SizedBox(height: 22),
               Text('Не правильных ответов ${model.questions.length - model.answers.length}'),
               const SizedBox(height: 22),
@@ -32,9 +38,8 @@ class _ResultState extends State<Result> {
                           onPressed: () => model.restart(context),
                           child: const Text('Результат отправлен, начать заново')))
                   : SizedBox(
-                          height: 40,
-                          child: TextButton(
-                              onPressed: () => model.sendResult(), child: const Text('Отправить результат'))),
+                      height: 40,
+                      child: TextButton(onPressed: () => model.sendResult(), child: const Text('Отправить результат'))),
               model.isLoading
                   ? const SizedBox(height: 40, child: CircularProgressIndicator())
                   : SizedBox(

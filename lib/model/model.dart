@@ -41,6 +41,8 @@ class Model with ChangeNotifier {
       questions.shuffle();
     } on FirebaseException catch (e) {
       if (kDebugMode) print(e);
+      questions = [];
+      notifyListeners();
     } finally {}
   }
 
