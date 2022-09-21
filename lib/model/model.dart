@@ -65,12 +65,12 @@ class Model with ChangeNotifier {
   }
 
   Color getColor(dynamic itemQuest, int index) => selected(index, itemQuest)
-        ? questions[index].answers.indexOf(itemQuest) == questions[index].correctAnswers.indexOf('true')
-            ? Colors.green.shade100
-            : Colors.red.shade100
-        : Colors.white;
+      ? questions[index].answers.indexOf(itemQuest) == questions[index].correctAnswers.indexOf('true')
+          ? Colors.green.shade100
+          : Colors.red.shade100
+      : Colors.white;
 
-dynamic  groupValue(int index) => answers[index] !=null ? question(index).answers[answers[index]] : null;
+  dynamic groupValue(int index) => answers[index] != null ? question(index).answers[answers[index]] : null;
 
   void setCategory(String? d) {
     category = d;
@@ -117,6 +117,6 @@ dynamic  groupValue(int index) => answers[index] !=null ? question(index).answer
   restart(BuildContext context) {
     category == null;
     difficulty = null;
-    Navigator.pushNamedAndRemoveUntil(context, '/', (d) => false);
+    Navigator.popUntil(context, ModalRoute.withName('/'));
   }
 }
