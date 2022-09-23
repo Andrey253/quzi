@@ -115,7 +115,7 @@ class Model with ChangeNotifier {
   }
 
   restart(BuildContext context) {
-    category == null;
+    category = null;
     difficulty = null;
     Navigator.popUntil(context, ModalRoute.withName('/'));
   }
